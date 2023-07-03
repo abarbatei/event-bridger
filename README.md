@@ -6,11 +6,23 @@ POC for ClayNation Cardano - EVM event mapping
 
 - Contract code: [src/EventBridger.sol](src/EventBridger.sol)
 
-- Run tests (needed for gas report) with gas report: `forge test --gas-report -vvv`
+- Run tests (needed for gas report) with gas report: 
 
-- Deploy contract on Mumbai: `forge script script/EventBridgerDeployer.s.sol:EventBridgerDeployer --broadcast --chain-id 80001 --rpc-url "https://rpc.ankr.com/polygon_mumbai" --legacy`
+```
+forge test --gas-report -vvv
+```
 
-- Verify contract on Mumbai (needed): `forge verify-contract --verifier-url https://api-testnet.polygonscan.com/api/ <DEPLOYED_CONTRACT_ADDRESS> src/EventBridger.sol:EventBridger <POLYSCAN_API_KEY>`
+- Deploy contract on Mumbai: 
+
+```
+forge script script/EventBridgerDeployer.s.sol:EventBridgerDeployer --broadcast --chain-id 80001 --rpc-url "https://rpc.ankr.com/polygon_mumbai" --legacy
+```
+
+- Verify contract on Mumbai (add your DEPLOYED_CONTRACT_ADDRESS and POLYSCAN_API_KEY):
+
+```
+forge verify-contract --verifier-url https://api-testnet.polygonscan.com/api/ <DEPLOYED_CONTRACT_ADDRESS> src/EventBridger.sol:EventBridger <POLYSCAN_API_KEY>
+```
 
 ## Contract overview
 
@@ -20,7 +32,7 @@ POC for ClayNation Cardano - EVM event mapping
 - `emitERC721TransferEventBatch`:
     - emits as many ERC721 Transfer events as passed to it
     - warning, passing a lot here can make the function run out of gas (a few hundred can work)
-    - `use this when testing`
+    - **`use this when testing`**
 - `emitERC1155TransferSingleEvent`
     - emits 1 ERC1155 TransferSingle event, possibly useful for an optimization, ignore for now
 - `emitERC1155TransferBatchEvent`
@@ -125,5 +137,3 @@ Example verification on Mumbai (you still need to change the address to your dep
 ```
 forge verify-contract --verifier-url https://api-testnet.polygonscan.com/api/ 0xdeadbeefdeadbeefdeadbeefdeadbeef src/EventBridger.sol:EventBridger ABBABABABABABABABAB
 ```
-
-
