@@ -61,7 +61,7 @@ contract EventBridger is Ownable2Step, IERC1155, IERC721 {
         emit TransferSingle(operator, from, to, id, value);
     }
 
-    function emitERC721TransferBatchEvent(
+    function emitERC1155TransferBatchEvent(
         address operator,
         address from,
         address to,
